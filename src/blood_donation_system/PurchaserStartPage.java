@@ -5,6 +5,7 @@
  */
 package blood_donation_system;
 
+import java.awt.HeadlessException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -162,8 +163,9 @@ public class PurchaserStartPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        new Purchaser_reg().setVisible(true);
+        String user = "john"; // Replace "username" with the actual username
+        new Purchaser_account(user).setVisible(true);
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -214,4 +216,5 @@ public class PurchaserStartPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
-}
+
+   }

@@ -186,7 +186,7 @@ public class Purchaser_reg extends javax.swing.JFrame {
         } else {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                Connection con = DriverManager.getConnection("jdbc:mysql://localhost/blooddonation", "root", "");
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost/blooddonation", "root", "root");
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery("select count(*) from purchaser");
                 rs.next();

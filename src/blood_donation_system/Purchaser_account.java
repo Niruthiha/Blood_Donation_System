@@ -24,26 +24,38 @@ public class Purchaser_account extends javax.swing.JFrame {
 
     /**
      * Creates new form Purchaser_account
+     * @param user
      */
     public Purchaser_account(String user) {
-        try {
-            initComponents();
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con=DriverManager.getConnection("jdbc:mysql://localhost/blooddonation","root","");
-           
-            Statement st=con.createStatement();
-            ResultSet rs= st.executeQuery("select * from purchaser where user='"+user+"'");
-            rs.next();
-            jLabel7.setText(rs.getString(2));
-            jLabel8.setText(rs.getString(3));
-            jLabel9.setText(rs.getString(4));
-            jLabel10.setText(rs.getString(7));
-            
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(Purchaser_account.class.getName()).log(Level.SEVERE, null, ex);
-        }
+         try {
+        initComponents();
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con=DriverManager.getConnection("jdbc:mysql://localhost/blooddonation","root","root");
+
+        Statement st=con.createStatement();
+       ResultSet rs= st.executeQuery("select * from purchaser where user='"+user+"'");
+if (rs.next()) {
+    // Print fetched data for debugging
+    System.out.println("Name: " + rs.getString(2));
+    System.out.println("Mobile: " + rs.getString(3));
+    System.out.println("Address: " + rs.getString(4));
+    System.out.println("Register Date: " + rs.getString(7));
+
+    // Set fetched data to corresponding labels
+    jLabel7.setText(rs.getString(2)); // Name
+    jLabel8.setText(rs.getString(3)); // Mobile
+    jLabel9.setText(rs.getString(4)); // Address
+    jLabel10.setText(rs.getString(7)); // Register Date
+} else {
+    System.out.println("No user found with the specified username.");
+}
+    } catch (ClassNotFoundException | SQLException ex) {
+        Logger.getLogger(Purchaser_account.class.getName()).log(Level.SEVERE, null, ex);
+    }
         
     }
+
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -194,12 +206,12 @@ public class Purchaser_account extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, 520, 270));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 520, 270));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IconicPackage/112804-red-and-black-blurred-background-vector.png"))); // NOI18N
         jLabel2.setText("jLabel2");
@@ -268,10 +280,8 @@ public class Purchaser_account extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Purchaser_account("user").setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Purchaser_account("user").setVisible(true);
         });
     }
 
